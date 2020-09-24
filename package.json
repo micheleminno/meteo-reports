@@ -3,8 +3,8 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./index.js --exec babel-node -e js",
-        "debug": "DEBUG=express:* nodemon ./index.js --exec babel-node -e js"
+        "start": "nodemon ./server.js --exec babel-node -e js",
+        "debug": "DEBUG=express:* nodemon ./server.js --exec babel-node -e js"
     },
     "dependencies": {
         "cookie-parser": "~1.4.4",

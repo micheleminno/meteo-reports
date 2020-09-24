@@ -1,2 +1,2 @@
 # meteo-reports
-Comparative wheather forecasts from personalized list of cities.
+Comparative weather forecasts from personalized list of cities.
