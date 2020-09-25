@@ -3,11 +3,14 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./server.js --exec babel-node -e js",
-        "debug": "DEBUG=express:* nodemon ./server.js --exec babel-node -e js"
+        "start:dev": "concurrently 'npm start --prefix client' 'nodemon ./bin/www'",
+        "start": "npm run build --prefix client && nodemon ./bin/www",
+        "start-old": "nodemon ./server.js --exec babel-node -e js",
+        "debug-old": "DEBUG=express:* nodemon ./server.js --exec babel-node -e js"
     },
     "dependencies": {
         "axios": "^0.20.0",
+        "concurrently": "^5.3.0",
         "cookie-parser": "~1.4.4",
         "debug": "~2.6.9",
         "express": "^4.16.4",

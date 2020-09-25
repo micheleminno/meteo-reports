@@ -21,10 +21,6 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "..", "build")));
 
-app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, "..", "build", "index.html"));
-});
-
 app.use('/api/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/locations', locationsRouter);
