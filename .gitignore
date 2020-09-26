@@ -123,3 +123,6 @@ dist
 
 # MacOS files
 .DS_Store
+
+# Configuration files
+config.js
