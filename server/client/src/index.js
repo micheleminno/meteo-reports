@@ -25,7 +25,7 @@ function SearchLocation() {
     const [locationWeather, setLocationWeather] = useState("");
     useEffect(() => {
         console.log(`Fetching data for location ${location}`);
-        fetch(`/api/locations/weather/${location}`)
+        fetch(`/api/locations/find/${location}`)
             .then(res => res.json())
             .then(setLocationWeather)
             .catch(err => console.log(err));
@@ -40,22 +40,40 @@ function SearchLocation() {
                         <button id="searchButton" onClick={e => setSearchedLocation(location)} >Search location</button>
                 </div>
                 <div>
-                    { locationWeather && <Location location = {searchedLocation} result={locationWeather} />}
+                    { locationWeather && <LocationList location = {searchedLocation} resultData={locationWeather} />}
                 </div>
             </div>
     </>);
 }
 
-function Location({location, result}) {
+function LocationList({location, resultData}) {
 
-    console.log(result);
+    console.log(resultData);
 
-    return ( <div id="location">
-                <h4> Location: {location} </h4>
-                <h4> Weather: {result.weather[0].description} </h4>
-
-            </div>
+    return (
+      <div>
+        <ul>
+            {
+                resultData.map(cityResultData => {
+                    return ( <Location key={cityResultData.id} data = {cityResultData} /> );
+                })
+            }
+        </ul>
+      </div>
     );
+}
+
+function Location({data}) {
+
+    return (
+        <li>
+            <div id="location">
+                <p>Location: {data.name}</p>
+                <p>Country: {data.country}</p>
+                <p>Weather: {data.weather}</p>
+            </div>
+        </li>
+        );
 }
 
 function Home() {
