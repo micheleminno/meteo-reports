@@ -89,6 +89,10 @@ function Location({data}) {
             <div id="location">
                 <p>Location: {locationAddress}</p>
                 <p>Weather: {data.weather}</p>
+                <p>Current temp.: {data.temp}</p>
+                <p>Min. temp.: {data.temp_min}</p>
+                <p>Max. temp.: {data.temp_max}</p>
+                <p>Wind speed: {data.wind_speed}</p>
             </div>
         </li>
         );
