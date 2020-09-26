@@ -18,3 +18,11 @@ body {
     display:inline;
     margin-left: 2em;
 }
+
+.cityEntry {
+
+    background-color: #5dd55d;
+    width: 20em;
+    border-style: solid;
+    margin: 3em;
+}
