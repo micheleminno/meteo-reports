@@ -50,9 +50,9 @@ function Location({location, result}) {
 
     console.log(result);
 
-    return ( <div>
-                <h2> {location} </h2>
-                <h4> visibility {result.visibility} </h4>
+    return ( <div id="location">
+                <h4> Location: {location} </h4>
+                <h4> Weather: {result.weather[0].description} </h4>
 
             </div>
     );
