@@ -1,44 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 
+import './styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Locations() {
+function SearchLocation() {
 
-    const [locations, setLocations] = useState("");
+    // hook for location
+    const [location, setLocation] = useState("");
 
-    //const locationData = require("./locationData.json");
-    const sendLocations = () => {
-        fetch('/api/locations')
-            .then(response => response.json())
-            .then(resp => setLocations(resp))
+    useEffect(() => {
+        console.log(`You typed ${location}`);
+    }, [location]);
+
+    // hook for searched location
+    const [searchedLocation, setSearchedLocation] = useState("");
+
+    useEffect(() => {
+        console.log(`You searched ${searchedLocation}`);
+    }, [searchedLocation]);
+
+    // hook for location result weather
+    const [locationWeather, setLocationWeather] = useState("");
+    useEffect(() => {
+        console.log(`Fetching data for location ${location}`);
+        fetch(`/api/locations/weather/${location}`)
+            .then(res => res.json())
+            .then(setLocationWeather)
             .catch(err => console.log(err));
-    };
+    }, [searchedLocation]);
 
     return (
         <>
-            <div
-                style={{ flexDirection: 'column', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-
-            <div>
-                <button onClick={sendLocations} >See locations</button>
-            </div>
-            {locations && <div> {
-                    locations.map(location => (
-                    <Location key = {location.id} location = {location.location} />))
-                    }
-                </div>}
+            <div id="search">
+                <div>
+                    <input type="text" id="location" name="location"
+                            value={location} onChange={e => setLocation(e.target.value)}/>
+                        <button id="searchButton" onClick={e => setSearchedLocation(location)} >Search location</button>
+                </div>
+                <div>
+                    { locationWeather && <Location location = {searchedLocation} result={locationWeather} />}
+                </div>
             </div>
     </>);
 }
 
-function Location({location}) {
+function Location({location, result}) {
+
+    console.log(result);
 
     return ( <div>
-                <h4> {location} </h4>
+                <h2> {location} </h2>
+                <h4> visibility {result.visibility} </h4>
+
             </div>
     );
-
 }
 
 function Home() {
@@ -47,7 +64,7 @@ function Home() {
      <>
         <h1> Meteo reports </h1>
         <p> See and compare weather reports across the world </p>
-        <Locations />
+        <SearchLocation />
      </>
  );
 }

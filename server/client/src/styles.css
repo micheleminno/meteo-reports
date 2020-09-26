@@ -1,3 +1,19 @@
 body {
   font-size: 20px;
 }
+
+#location {
+    font-size: 1em;
+    margin-left: 1.5em;
+}
+
+#search {
+    margin-top: 2.5em;
+    alignItems: center;
+    justifyContent: center;
+}
+
+#searchButton {
+    display:inline;
+    margin-left: 2em;
+}
