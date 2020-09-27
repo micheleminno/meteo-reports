@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "start:dev": "concurrently 'npm start --prefix client' 'nodemon ./bin/www'",
-        "start": "npm run build --prefix client && nodemon ./bin/www"
+        "start": "npm start --prefix client && nodemon ./bin/www"
     },
     "dependencies": {
         "axios": "^0.20.0",
