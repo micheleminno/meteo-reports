@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { usePromiseTracker, trackPromise } from "react-promise-tracker";
+import Loader from 'react-loader-spinner';
+
 import App from "./App";
 
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+const LoadingIndicator = props => {
+
+    const { promiseInProgress } = usePromiseTracker();
+
+    return ( promiseInProgress &&
+        <div className="loading">
+            <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+        </div>
+    );
+}
 
 function SearchLocation() {
 
@@ -25,11 +39,16 @@ function SearchLocation() {
     const [locationWeather, setLocationWeather] = useState("");
     useEffect(() => {
         console.log(`Fetching data for location ${location}`);
-        fetch(`/api/locations/find/${location}`)
-            .then(res => res.json())
-            .then(setLocationWeather)
-            .catch(err => console.log(err));
-    }, [searchedLocation]);
+
+        trackPromise(
+            fetch(`/api/locations/find/${location}`)
+                .then(res => res.json())
+                .then(setLocationWeather)
+                .catch(err => console.log(err))
+            );
+
+        }, [searchedLocation]);
+
 
     return (
         <>
@@ -77,10 +96,11 @@ function Location({data}) {
 
     useEffect(() => {
         console.log(`Fetching data for location ${location}`);
-        fetch(`/api/google/address/${latitude}/${longitude}`)
-            .then(res => res.json())
-            .then(setLocationAddress)
-            .catch(err => console.log(err));
+
+            fetch(`/api/google/address/${latitude}/${longitude}`)
+                .then(res => res.json())
+                .then(setLocationAddress)
+                .catch(err => console.log(err));
     }, []);
 
 
@@ -104,7 +124,9 @@ function Home() {
      <>
         <h1> Meteo reports </h1>
         <p> See and compare weather reports across the world </p>
+
         <SearchLocation />
+        <LoadingIndicator/>
      </>
  );
 }
