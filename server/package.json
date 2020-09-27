@@ -5,8 +5,7 @@
     "scripts": {
         "start:dev": "concurrently 'npm start --prefix client' 'nodemon ./bin/www'",
         "start": "npm run build --prefix client && nodemon ./bin/www",
-        "start-old": "nodemon ./server.js --exec babel-node -e js",
-        "debug-old": "DEBUG=express:* nodemon ./server.js --exec babel-node -e js"
+        "install": "npm install"
     },
     "dependencies": {
         "axios": "^0.20.0",
