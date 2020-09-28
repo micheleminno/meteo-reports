@@ -1,12 +1,10 @@
 const express = require('express');
 const axios = require('axios');
 
-var config = require('../config');
-
 const router = express.Router();
 
 const GOOGLE_API = "https://maps.googleapis.com/maps/api/geocode/json";
-const API_KEY = config.google.api_key;
+const API_KEY = process.env.GOOGLE_API_KEY;
 
 router.get("/address/:latitude/:longitude", function(req, res, next) {
 

@@ -1,13 +1,11 @@
 const express = require('express');
 const axios = require('axios');
 
-var config = require('../config');
-
 const router = express.Router();
 
 const API_HOST = "community-open-weather-map.p.rapidapi.com";
 const OPEN_WEATHER_MAP_API = "https://" + API_HOST;
-const API_KEY = config.open_weather.api_key;
+const API_KEY = process.env.OPENWEATHER_API_KEY;
 
 const headers = {
     "x-rapidapi-host": API_HOST,
