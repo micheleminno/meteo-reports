@@ -1,6 +1,6 @@
 const app = require('./app.js');
 
-const port = process.env.DEV_APP_PORT || process.env.PORT
+const port = process.env.DEV_APP_PORT || process.env.PORT;
 
 app.listen(port, () => {
 
