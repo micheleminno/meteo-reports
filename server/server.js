@@ -1,7 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
@@ -26,7 +25,6 @@ app.use(cookieParser());
 
 const buildPath = path.join(__dirname, '..', 'build');
 app.use(express.static(buildPath));
-app.use(cors());
 
 app.use('/api/', indexRouter);
 app.use('/api/users', usersRouter);
