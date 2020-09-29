@@ -7,11 +7,10 @@ import {BASE_API_URL} from '../utils/constants';
 import fakeLocations from "../utils/fakeLocations.json";
 
 
-
 const Results = ({ searchedLocation }) => {
 
+    const {promiseInProgress} = usePromiseTracker();
     const [locationWeather, setLocationWeather] = useState("");
-
 
     useEffect(() => {
         console.log(`Fetching data for location ${searchedLocation}`);
@@ -32,7 +31,6 @@ const Results = ({ searchedLocation }) => {
 
     }, [searchedLocation]);
 
-    const {promiseInProgress} = usePromiseTracker();
 
     return (
         <>
