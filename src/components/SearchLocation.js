@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
+import LoadingIndicator from './LoadingIndicator';
 import Results from './Results';
 
 function SearchLocation() {
@@ -45,6 +46,7 @@ function SearchLocation() {
             </Row>
           </Form>
         </div>
+        <LoadingIndicator />
         <Results searchedLocation={state.searchedLocation}/>
       </>
     );
