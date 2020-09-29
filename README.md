@@ -10,3 +10,6 @@ The API server is [here](https://meteo-reports.herokuapp.com/api/).
 ## Install and run locally
 - npm run build: it will build the client and install the server
 - npm start: it will start the server
+
+## Run only the client with fake data
+- npm run start-client: it will start the client with no server
