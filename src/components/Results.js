@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {trackPromise} from "react-promise-tracker";
+import Loader from 'react-loader-spinner';
+import {usePromiseTracker, trackPromise} from "react-promise-tracker";
 
 import LocationList from './LocationList';
 import {BASE_API_URL} from '../utils/constants';
@@ -31,13 +32,21 @@ const Results = ({ searchedLocation }) => {
 
     }, [searchedLocation]);
 
+    const {promiseInProgress} = usePromiseTracker();
+
     return (
-        <div> {
-                locationWeather &&
-                <LocationList location = {searchedLocation}
-                              resultData = {locationWeather}/>
-              }
-        </div>
+        <>
+            <div className = "loading">
+                {promiseInProgress && <Loader type = "ThreeDots" color = "#2BAD60"
+                        height = "100" width = "100" />}
+            </div>
+            <div> {
+                    locationWeather &&
+                    <LocationList location = {searchedLocation}
+                                  resultData = {locationWeather}/>
+                  }
+            </div>
+        </>
       );
 };
 
