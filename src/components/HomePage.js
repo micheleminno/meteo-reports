@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from './Header';
 import SearchLocation from './SearchLocation';
 import LoadingIndicator from './LoadingIndicator';
 
@@ -7,12 +8,11 @@ import LoadingIndicator from './LoadingIndicator';
 function HomePage() {
 
     return (
-        <>
-            <h1> Meteo reports </h1>
-            <p> See and compare weather reports across the world </p>
+        <div>
+            <Header />
             <SearchLocation />
             <LoadingIndicator />
-        </>
+        </div>
     );
 }
 

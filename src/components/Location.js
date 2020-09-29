@@ -26,19 +26,21 @@ function Location({data}) {
         else {
             setLocationAddress("Rome, NY, USA");
         }
-    }, []);
+    }, [location, latitude, longitude]);
 
-    return ( <
-        li className = "cityEntry">
-        <div id = "location">
-            <p> Location: {locationAddress} </p>
-            <p> Weather: {data.weather} </p>
-            <p> Current temp.: {data.temp} </p>
-            <p> Min.temp.: {data.temp_min} </p>
-            <p> Max.temp.: {data.temp_max} </p>
-        <p> Wind speed: {data.wind_speed} </p>
+    return (
+        <div className="container, locationEntry">
+          <div className="row">
+            <div className="col-4">
+              {locationAddress}
+            </div>
+            <div className="col-8">
+                <p> {data.weather} </p>
+                <p> Temperature: {data.temp} (min: {data.temp_min} - max: {data.temp_max}) </p>
+                <p> wind speed: {data.wind_speed} </p>
+            </div>
+          </div>
         </div>
-        </li>
     );
 }
 

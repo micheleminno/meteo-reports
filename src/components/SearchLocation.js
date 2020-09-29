@@ -1,65 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import {trackPromise} from "react-promise-tracker";
+import React, { useState } from 'react';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
-import LocationList from './LocationList';
-import {BASE_API_URL} from '../utils/constants';
-import fakeLocations from "../utils/fakeLocations.json";
-
+import Results from './Results';
 
 function SearchLocation() {
 
-    const [location, setLocation] = useState("");
+    const [state, setState] = useState({
+        location: ""
+    });
 
-    useEffect(() => {
-        console.log(`You typed ${location}`);
-    }, [location]);
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setState({ ...state, [name]: value });
+    };
 
-    const [searchedLocation, setSearchedLocation] = useState("");
-
-    useEffect(() => {
-        console.log(`You searched ${searchedLocation}`);
-    }, [searchedLocation]);
-
-    const [locationWeather, setLocationWeather] = useState("");
-    useEffect(() => {
-        console.log(`Fetching data for location ${location}`);
-
-        if(process.env.NODE_ENV === "production") {
-
-            trackPromise(
-                fetch(`${BASE_API_URL}/api/locations/find/${location}`)
-                .then(res => res.json())
-                .then(setLocationWeather)
-                .catch(err => console.log(err))
-            );
-        }
-        else {
-
-            setLocationWeather(fakeLocations);
-        }
-
-    }, [searchedLocation]);
+    const handleSearch = (event) => {
+        event.preventDefault();
+        console.log(state);
+        setState({ ...state, "searchedLocation": state.location });
+    };
 
     return (
-        <>
-            <div id = "search">
-                <div>
-                    <input type = "text" id = "location" name = "location"
-                            value = {location}
-                            onChange = {e => setLocation(e.target.value)}/>
-                    <button id = "searchButton"
-                            onClick = {e => setSearchedLocation(location)}>
-                                Search location
-                    </button>
-                </div>
-                <div> {
-                        locationWeather &&
-                        <LocationList location = {searchedLocation}
-                                      resultData = {locationWeather}/>
-                      }
-                </div>
-            </div>
-        </>
+
+      <>
+        <div className="search-section">
+          <Form className="search-form" onSubmit={handleSearch}>
+            <Row>
+              <Col>
+                <Form.Group controlId="description">
+                  <Form.Control
+                    type="text"
+                    name="location"
+                    value={state.location || ''}
+                    placeholder="Enter location"
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                 <Button variant="primary" type="submit" className="btn-search">
+                    Search
+                 </Button>
+              </Col>
+            </Row>
+          </Form>
+        </div>
+        <Results searchedLocation={state.searchedLocation}/>
+      </>
     );
 }
 

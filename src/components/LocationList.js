@@ -8,13 +8,12 @@ function LocationList({location, resultData}) {
 
     return (
         <div>
-            <ul> {
+            {
                 resultData.map(cityResultData => {
                     return ( <Location key = {cityResultData.id}
                                        data = {cityResultData}/> );
                 })
             }
-            </ul>
         </div >
     );
 }
