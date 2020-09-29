@@ -3,6 +3,7 @@ import {trackPromise} from "react-promise-tracker";
 
 import LocationList from './LocationList';
 import {BASE_API_URL} from '../utils/constants';
+import fakeLocations from "../utils/fakeLocations.json";
 
 
 function SearchLocation() {
@@ -23,12 +24,19 @@ function SearchLocation() {
     useEffect(() => {
         console.log(`Fetching data for location ${location}`);
 
-        trackPromise(
-            fetch(`${BASE_API_URL}/api/locations/find/${location}`)
-            .then(res => res.json())
-            .then(setLocationWeather)
-            .catch(err => console.log(err))
-        );
+        if(process.env.NODE_ENV === "production") {
+
+            trackPromise(
+                fetch(`${BASE_API_URL}/api/locations/find/${location}`)
+                .then(res => res.json())
+                .then(setLocationWeather)
+                .catch(err => console.log(err))
+            );
+        }
+        else {
+
+            setLocationWeather(fakeLocations);
+        }
 
     }, [searchedLocation]);
 

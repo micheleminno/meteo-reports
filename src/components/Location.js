@@ -16,11 +16,16 @@ function Location({data}) {
 
     useEffect(() => {
         console.log(`Fetching data for location ${location}`);
+        if(process.env.NODE_ENV === "production") {
 
-        fetch(`${BASE_API_URL}/api/google/address/${latitude}/${longitude}`)
-            .then(res => res.json())
-            .then(setLocationAddress)
-            .catch(err => console.log(err));
+            fetch(`${BASE_API_URL}/api/google/address/${latitude}/${longitude}`)
+                .then(res => res.json())
+                .then(setLocationAddress)
+                .catch(err => console.log(err));
+        }
+        else {
+            setLocationAddress("Rome, NY, USA");
+        }
     }, []);
 
     return ( <

@@ -1,0 +1,16 @@
+[
+
+    {
+        "coordinates": [34.257, -85.1647],
+        "country": "US",
+        "humidity": 87,
+        "id": 4219762,
+        "name": "Rome",
+        "temp": "14° C",
+        "temp_max": "15° C",
+        "temp_min": "14° C",
+        "weather": "moderate rain",
+        "wind_degree": 330,
+        "wind_speed": "3.1 Km/h"
+    }
+]

@@ -3,28 +3,28 @@ body {
 }
 
 #location {
-    font-size: 1em;
-    margin-left: 1.5em;
-    margin-top: 2em;
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    margin-top: 2rem;
 }
 
 #search {
-    margin-top: 2.5em;
-    alignItems: center;
+    margin-top: 2.5rem;
+    alignItrems: center;
     justifyContent: center;
 }
 
 #searchButton {
     display:inline;
-    margin-left: 2em;
+    margin-left: 2rem;
 }
 
 .cityEntry {
 
     background-color: #5dd55d;
-    width: 20em;
+    width: 20rem;
     border-style: solid;
-    margin: 3em;
+    margin: 3rem;
 }
 
 .loading {
@@ -33,5 +33,5 @@ body {
     height: 100;
     display: flex;
     justifyContent: center;
-    alignItems: center;
+    alignItrems: center;
 }
