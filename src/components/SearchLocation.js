@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import Loader from 'react-loader-spinner';
+import {usePromiseTracker} from "react-promise-tracker";
 
-import Results from './Results';
+import Spinner from "./Spinner";
+import Results from "./Results";
 
-function SearchLocation() {
+
+const SearchLocation = () => {
 
     const [state, setState] = useState({
         location: ""
@@ -45,7 +49,9 @@ function SearchLocation() {
             </Row>
           </Form>
         </div>
-        <Results searchedLocation={state.searchedLocation}/>
+        <Spinner />
+        {state.searchedLocation &&
+            <Results searchedLocation={state.searchedLocation}/>}
       </>
     );
 }

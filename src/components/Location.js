@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import {BASE_API_URL} from '../utils/constants';
 
 
-function Location({data}) {
+const Location = ({data}) => {
 
     const location = data.name;
     const latitude = data.coordinates[0];
@@ -18,9 +19,8 @@ function Location({data}) {
         console.log(`Fetching data for location ${location}`);
         if(process.env.NODE_ENV === "production") {
 
-            fetch(`${BASE_API_URL}/api/google/address/${latitude}/${longitude}`)
-                .then(res => res.json())
-                .then(setLocationAddress)
+            axios.get(`${BASE_API_URL}/api/google/address/${latitude}/${longitude}`)
+                .then(result => setLocationAddress(result.data))
                 .catch(err => console.log(err));
         }
         else {

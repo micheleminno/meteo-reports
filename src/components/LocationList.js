@@ -2,7 +2,7 @@ import React from 'react';
 
 import Location from './Location';
 
-function LocationList({location, resultData}) {
+const LocationList = ({location, resultData}) => {
 
     console.log(resultData);
 

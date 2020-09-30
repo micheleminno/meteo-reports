@@ -2,10 +2,11 @@ import React from "react";
 
 import HomePage from './HomePage';
 
-function App() {
+
+const App = () => {
 
     return (
-            <HomePage />
+            <HomePage />    
     );
 }
 
