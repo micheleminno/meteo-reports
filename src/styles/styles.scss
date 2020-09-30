@@ -62,13 +62,8 @@ input {
     }
 
     .weather-info {
-      .job-title {
-        margin-bottom: 2rem;
-      }
-    }
-
-    .weather-info {
       flex: 1;
+      word-break: break-all;    
     }
   }
 }
