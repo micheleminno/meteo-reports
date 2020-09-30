@@ -35,7 +35,7 @@ const Location = ({data}) => {
             </div>
             <div className="weather-info">
                 <p> {data.weather} </p>
-                <p> Temperature: {data.temp} (min: {data.temp_min} - max: {data.temp_max}) </p>
+                <p> temperature: {data.temp} (min: {data.temp_min} - max: {data.temp_max}) </p>
                 <p> wind speed: {data.wind_speed} </p>
             </div>
         </div>
