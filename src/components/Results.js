@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {trackPromise} from "react-promise-tracker";
 
-import LocationList from './LocationList';
+import Location from './Location';
 import {BASE_API_URL} from '../utils/constants';
 import fakeLocations from "../utils/fakeLocations.json";
 
@@ -31,13 +31,19 @@ const Results = ({ searchedLocation }) => {
 
 
     return (
-        <div> {
-                locationWeather &&
-                <LocationList location = {searchedLocation}
-                              resultData = {locationWeather}/>
-              }
-        </div>
-      );
+            locationWeather &&
+
+                <div className="search-results">
+
+                    {
+                        locationWeather.map(cityResultData => {
+                        return ( <Location key = {cityResultData.id}
+                                           data = {cityResultData}/> );
+                        })
+                    }
+
+                </div >
+     );
 };
 
 export default Results;
