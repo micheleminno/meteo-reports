@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import Loader from 'react-loader-spinner';
-import {usePromiseTracker} from "react-promise-tracker";
 
 import Spinner from "./Spinner";
 import Results from "./Results";

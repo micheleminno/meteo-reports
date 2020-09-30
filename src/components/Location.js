@@ -29,17 +29,15 @@ const Location = ({data}) => {
     }, [location, latitude, longitude]);
 
     return (
-        <div className="container, locationEntry">
-          <div className="row">
-            <div className="col-4">
-              {locationAddress}
+        <div className="location-item">
+            <div className="location-name">
+                {locationAddress}
             </div>
-            <div className="col-8">
+            <div className="weather-info">
                 <p> {data.weather} </p>
                 <p> Temperature: {data.temp} (min: {data.temp_min} - max: {data.temp_max}) </p>
                 <p> wind speed: {data.wind_speed} </p>
             </div>
-          </div>
         </div>
     );
 }
