@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
+import LocationContext from '../context/LocationContext';
 import {BASE_API_URL} from '../utils/constants';
 
 
 const Location = ({data}) => {
 
-    const location = data.name;
+    const id = data.id;
+    const locationName = data.name;
     const latitude = data.coordinates[0];
     const longitude = data.coordinates[1];
+
+    const {onItemClick} = useContext(LocationContext);
 
     console.log(`lat: ${latitude}, long: ${longitude}`);
 
@@ -16,7 +20,7 @@ const Location = ({data}) => {
     const [locationAddress, setLocationAddress] = useState("");
 
     useEffect(() => {
-        console.log(`Fetching data for location ${location}`);
+        console.log(`Fetching data for location ${locationName}`);
         if(process.env.NODE_ENV === "production") {
 
             axios.get(`${BASE_API_URL}/api/google/address/${latitude}/${longitude}`)
@@ -26,10 +30,11 @@ const Location = ({data}) => {
         else {
             setLocationAddress("Rome, NY, USA");
         }
-    }, [location, latitude, longitude]);
+    }, [locationName, latitude, longitude]);
 
     return (
-        <div className="location-item">
+
+        <div className="location-item" onClick={() => onItemClick(id)}>
             <div className="location-name">
                 {locationAddress}
             </div>

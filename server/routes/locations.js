@@ -13,20 +13,21 @@ const headers = {
     "useQueryString": true
 };
 
-router.get("/weather/:location", function(req, res, next) {
+router.get("/forecast/:locationId", function(req, res, next) {
 
-    const location = req.params.location;
+    const locationId = req.params.locationId;
 
-    axios.get(OPEN_WEATHER_MAP_API + "/weather", {
+    axios.get(OPEN_WEATHER_MAP_API + "/forecast", {
             headers: headers,
             params: {
-                q: location
+                id: locationId
             }
         })
         .then(function(response) {
 
             console.log(response);
-            res.json(response.data);
+            const resData = {city: response.data.city, list: response.data.list};
+            res.json(resData);
         })
         .catch(function(error) {
 
@@ -80,27 +81,6 @@ router.get("/find/:location", function(req, res, next) {
         .then(function() {
             // always executed
         });
-});
-// fake API
-router.get("/", function(req, res, next) {
-
-    res.json(data);
-});
-
-router.get("/location/:id", (req, res) => {
-
-    const locationId = req.params.id;
-    if (locationId >= 50) {
-        throw new Error("location not found");
-    }
-
-    res.send(data[locationId]);
-});
-
-router.post("/newLocation", (req, res) => {
-
-    console.log(req.body);
-    res.send(req.body);
 });
 
 module.exports = router;
