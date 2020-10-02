@@ -19,7 +19,7 @@ export const initiateGetLocations = (searchedLocation) => {
 
         console.log(locations);
 
-        return dispatch(setLocations(locations));
+        return dispatch(setLocations(locations.data));
 
     } catch (error) {
         // TODO
