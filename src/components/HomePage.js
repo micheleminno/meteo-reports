@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Header from './Header';
 import SearchLocation from './SearchLocation';
@@ -15,19 +16,15 @@ const HomePage = (props) => {
     const [page, setPage] = useState('home');
 
     useEffect(() => {
-        console.log("in setResults");
-        console.log(props.weather);
         setResults(props.weather);
     }, [props.weather]);
 
     const loadWeatherDetails = (locationId) => {
         const {dispatch} = props;
-        console.log(`Dispatching weather details with location id ${locationId}`);
         dispatch(
           initiateGetWeatherDetails(locationId)
         )
           .then((response) => {
-              console.log("Dispached response:");
               console.log(response);
           })
           .catch();
@@ -43,22 +40,17 @@ const HomePage = (props) => {
         setPage('home');
     };
 
-    /*
     let weatherDetails = {};
     if (page === 'details') {
         weatherDetails = results.list;
     }
-    */
 
     const value = {
-        results,
-        details: results,
+        city: results.city,
+        details: results.list,
         onItemClick: handleItemClick,
         onResetPage: handleResetPage
     };
-
-    console.log("value before provider");
-    console.log(value);
 
     return (
         <LocationContext.Provider value={value}>
@@ -71,6 +63,10 @@ const HomePage = (props) => {
             </div>
         </LocationContext.Provider>
     );
+};
+
+HomePage.propTypes = {
+  weather: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({

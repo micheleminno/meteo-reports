@@ -4,16 +4,7 @@ import LocationContext from '../context/LocationContext';
 
 const WeatherDetails = () => {
 
-    const { location, details, onResetPage } = useContext(LocationContext);
-
-    console.log(location);
-    console.log("location after useContext:");
-    console.log(location);
-
-    console.log("details after useContext:");
-    console.log(details);
-
-    const {description, temperature, wind} = details;
+    const {city, details, onResetPage} = useContext(LocationContext);
 
     return (
 
@@ -24,21 +15,21 @@ const WeatherDetails = () => {
             </a>
           </div>
           <div>
-            {location}
+            {city.name + ", " + city.country}
           </div>
           <div className="main-section">
             <div className="left-section">
               <div className="weather-description">
-                <div className="description">{description}</div>
+                <div className="description">{}</div>
               </div>
             </div>
             <div className="right-section">
               <div className="temperature-details">
                 <h3>About temperature</h3>
-                <div className="temperature">{temperature}</div>
+                <div className="temperature">{}</div>
             </div>
             <div className="wind-details">
-                <div className="wind">{wind}</div>
+                <div className="wind">{}</div>
               </div>
             </div>
           </div>

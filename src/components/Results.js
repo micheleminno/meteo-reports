@@ -1,48 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {trackPromise} from "react-promise-tracker";
+import React, { useContext } from 'react';
 
 import Location from './Location';
-import {BASE_API_URL} from '../utils/constants';
-import fakeLocations from "../utils/fakeLocations.json";
+import LocationContext from '../context/LocationContext';
 
 
-const Results = ({ searchedLocation }) => {
+const Results = () => {
 
-    const [locationWeather, setLocationWeather] = useState("");
-
-    useEffect(() => {
-        console.log(`Fetching data for location ${searchedLocation}`);
-
-        if(process.env.NODE_ENV === "production") {
-
-            trackPromise(
-                axios.get(`${BASE_API_URL}/api/locations/find/${searchedLocation}`)
-                    .then(result => setLocationWeather(result.data))
-                    .catch(err => console.log(err))
-            );
-        }
-        else {
-
-            setLocationWeather(fakeLocations);
-        }
-
-    }, [searchedLocation]);
-
-
+    const {locations} = useContext(LocationContext);
+    
     return (
-            locationWeather &&
+            <div className="search-results">
 
-                <div className="search-results">
+                {
+                    locations.map(cityData => {
+                    return ( <Location key = {cityData.id}
+                                       data = {cityData}/> );
+                    })
+                }
 
-                    {
-                        locationWeather.map(cityResultData => {
-                        return ( <Location key = {cityResultData.id}
-                                           data = {cityResultData}/> );
-                        })
-                    }
-
-                </div >
+            </div >
      );
 };
 

@@ -1,13 +1,13 @@
 import axios from 'axios';
-import { BASE_API_URL } from '../utils/constants';
+import { BASE_API_URL, SET_WEATHER } from '../utils/constants';
 import fakeWeatherDetails from "../utils/fakeWeatherDetails.json";
 
 export const initiateGetWeatherDetails = (locationId) => {
   return async (dispatch) => {
     try {
-        
+
         let weatherDetails;
-        if(locationId < 0) {
+        if(process.env.NODE_ENV === "production") {
             weatherDetails = fakeWeatherDetails;
         }
         else {
@@ -15,8 +15,6 @@ export const initiateGetWeatherDetails = (locationId) => {
                 `${BASE_API_URL}/api/locations/forecast/${locationId}`
             );
         }
-
-        console.log(weatherDetails);
 
         return dispatch(setWeather(weatherDetails));
 
@@ -27,6 +25,6 @@ export const initiateGetWeatherDetails = (locationId) => {
 };
 
 export const setWeather = (weather) => ({
-  type: 'SET_WEATHER',
+  type: SET_WEATHER,
   weather
 });
