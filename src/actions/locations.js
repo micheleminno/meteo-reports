@@ -8,7 +8,7 @@ export const initiateGetLocations = (searchedLocation) => {
 
         let locations;
         if(process.env.NODE_ENV === "production") {
-            const locations = await axios.get(
+            locations = await axios.get(
                 `${BASE_API_URL}/api/locations/find/${searchedLocation}`
             );
         }
