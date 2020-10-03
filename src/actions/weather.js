@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {trackPromise} from "react-promise-tracker";
+
 import { BASE_API_URL, SET_WEATHER } from '../utils/constants';
 import fakeWeatherDetails from "../utils/fakeWeatherDetails.json";
 
@@ -8,15 +10,17 @@ export const initiateGetWeatherDetails = (locationId) => {
 
         let weatherDetails;
         if(process.env.NODE_ENV === "production") {
-            weatherDetails = fakeWeatherDetails;
-        }
-        else {
-            const weatherDetails = await axios.get(
-                `${BASE_API_URL}/api/locations/forecast/${locationId}`
+            trackPromise(
+                const weatherDetails = await axios.get(
+                    `${BASE_API_URL}/api/locations/forecast/${locationId}`
+                );
             );
         }
+        else {
+            weatherDetails = fakeWeatherDetails;
+        }
 
-        return dispatch(setWeather(weatherDetails));
+        return dispatch(setWeather(weatherDetails.data));
 
     } catch (error) {
         // TODO
