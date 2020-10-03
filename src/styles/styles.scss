@@ -78,3 +78,29 @@ body {
     }
   }
 }
+
+.weather-details {
+  width: 90%;
+  margin: 0 auto;
+
+  .weather-item {
+    display: flex;
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    cursor: pointer;
+
+    & > div {
+      margin-left: 2rem;
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(150, 150, 150, 0.6);
+    }
+
+    .weather-info {
+      flex: 1;
+    }
+  }
+}

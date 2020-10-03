@@ -8,7 +8,7 @@ const WeatherDetails = ({location}) => {
 
     return (
 
-        <div className="job-details">
+        <div className="weather-details">
           <div className="back-link">
             <a href="/#" onClick={onResetDetails}>
               &lt;&lt; Compress this
