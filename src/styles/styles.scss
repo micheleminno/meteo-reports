@@ -80,7 +80,7 @@ body {
 }
 
 .weather-details {
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 
   .weather-item {
@@ -88,7 +88,7 @@ body {
     padding: 1rem;
     border: 1px solid #000;
     border-radius: 0.5rem;
-    margin: 2rem;
+    margin: 1rem;
     cursor: pointer;
 
     & > div {
@@ -97,10 +97,6 @@ body {
 
     &:hover {
       box-shadow: 0 0 10px rgba(150, 150, 150, 0.6);
-    }
-
-    .weather-info {
-      flex: 1;
     }
   }
 }

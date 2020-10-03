@@ -21,7 +21,7 @@ const WeatherDetails = ({location}) => {
               {
                   details && details.map(detail => {
                       return (
-                         <div>
+                         <div key={detail.dt}>
                             <div className="weather-item">
                               <div className="date">{detail.dt_txt}</div>
                               <div className="temperature">temperature: {detail.main.temp}</div>

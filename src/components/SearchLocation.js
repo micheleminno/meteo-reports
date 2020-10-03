@@ -23,7 +23,6 @@ const SearchLocation = (props) => {
 
     const loadLocations = (searchedLocation) => {
         const {dispatch} = props;
-        console.log("in loadLocations()");
         dispatch(
           initiateGetLocations(searchedLocation)
         )
@@ -34,7 +33,7 @@ const SearchLocation = (props) => {
     };
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        const { value } = event.target;
         setLocation(value);
     };
 

@@ -32,7 +32,7 @@ const Location = (props) => {
     }, [locationName, latitude, longitude]);
 
 
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState({});
     const [locationId, setLocationId] = useState(null);
 
     useEffect(() => {
@@ -87,7 +87,7 @@ const Location = (props) => {
 }
 
 Location.propTypes = {
-  weather: PropTypes.object.isRequired
+  weather: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired
 };
 
 const mapStateToProps = (state) => ({
