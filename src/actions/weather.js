@@ -11,7 +11,7 @@ export const initiateGetWeatherDetails = (locationId) => {
         let weatherDetails;
         if(process.env.NODE_ENV === "production") {
             trackPromise(
-                const weatherDetails = await axios.get(
+                weatherDetails = await axios.get(
                     `${BASE_API_URL}/api/locations/forecast/${locationId}`
                 );
             );
