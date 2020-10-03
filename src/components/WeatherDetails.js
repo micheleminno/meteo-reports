@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import LocationContext from '../context/LocationContext';
 
-const WeatherDetails = () => {
+const WeatherDetails = ({location}) => {
 
     const {city, details, onResetDetails} = useContext(LocationContext);
 
@@ -15,7 +15,7 @@ const WeatherDetails = () => {
             </a>
           </div>
           <div>
-              <h4>{city && city.name + ", " + city.country}</h4>
+              <h4>{location}</h4>
           </div>
           <div className="main-section">
               {

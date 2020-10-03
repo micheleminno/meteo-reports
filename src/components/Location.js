@@ -80,7 +80,7 @@ const Location = (props) => {
                     <div className="weather-wind"> wind speed: {props.data.wind_speed} </div>
                 </div>
             </div>
-            { locationId && <WeatherDetails/> }
+            { locationId && <WeatherDetails location={locationAddress}/> }
 
         </LocationContext.Provider>
     );
