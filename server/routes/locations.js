@@ -13,6 +13,14 @@ const headers = {
     "useQueryString": true
 };
 
+const toCelsius = kelvinDegrees => {
+
+    const KELVIN_ZERO = 273.15;
+    const CELSIUS = "° C";
+    const celsiusDegrees = Math.round(kelvinDegrees - KELVIN_ZERO) + CELSIUS;
+    return celsiusDegrees;
+};
+
 router.get("/forecast/:locationId", function(req, res, next) {
 
     const locationId = req.params.locationId;
@@ -26,6 +34,17 @@ router.get("/forecast/:locationId", function(req, res, next) {
         .then(function(response) {
 
             console.log(response);
+            response.data.list.map(weatherItem => {
+
+                weatherItem.main.temp = toCelsius(weatherItem.main.temp);
+                weatherItem.main.temp_min = toCelsius(weatherItem.main.temp_min);
+                weatherItem.main.temp_max = toCelsius(weatherItem.main.temp_max);
+                weatherItem.main.feels_like = toCelsius(weatherItem.main.feels_like);
+                weatherItem.dt_txt = weatherItem.dt_txt.slice(0, -3); ;
+
+                return weatherItem;
+            });
+
             const resData = {city: response.data.city, list: response.data.list};
             res.json(resData);
         })
@@ -41,8 +60,7 @@ router.get("/forecast/:locationId", function(req, res, next) {
 router.get("/find/:location", function(req, res, next) {
 
     const location = req.params.location;
-    const KELVIN_ZERO = 273.15;
-    const CELSIUS = "° C";
+
     const KM_H = " Km/h"
 
     axios.get(OPEN_WEATHER_MAP_API + "/find", {
@@ -61,9 +79,9 @@ router.get("/find/:location", function(req, res, next) {
                     name: city.name,
                     country: city.sys.country,
                     coordinates: [city.coord.lat, city.coord.lon],
-                    temp: Math.round(city.main.temp - KELVIN_ZERO) + CELSIUS,
-                    temp_min: Math.round(city.main.temp_min - KELVIN_ZERO) + CELSIUS,
-                    temp_max: Math.round(city.main.temp_max - KELVIN_ZERO) + CELSIUS,
+                    temp: toCelsius(city.main.temp),
+                    temp_min: toCelsius(city.main.temp_min),
+                    temp_max: toCelsius(city.main.temp_max),
                     humidity: city.main.humidity,
                     wind_speed: city.wind.speed + KM_H,
                     wind_degree: city.wind.deg,

@@ -7,7 +7,7 @@ import LocationContext from '../context/LocationContext';
 const Results = () => {
 
     const {locations} = useContext(LocationContext);
-    
+
     return (
             <div className="search-results">
 

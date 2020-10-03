@@ -11,28 +11,36 @@ const WeatherDetails = () => {
         <div className="job-details">
           <div className="back-link">
             <a href="/#" onClick={onResetPage}>
-              &lt;&lt; Back to results
+              &lt;&lt; Compress this
             </a>
           </div>
           <div>
-            {city.name + ", " + city.country}
+              <h4>{city && city.name + ", " + city.country}</h4>
           </div>
           <div className="main-section">
-            <div className="left-section">
-              <div className="weather-description">
-                <div className="description">{}</div>
-              </div>
-            </div>
-            <div className="right-section">
-              <div className="temperature-details">
-                <h3>About temperature</h3>
-                <div className="temperature">{}</div>
-            </div>
-            <div className="wind-details">
-                <div className="wind">{}</div>
-              </div>
-            </div>
-          </div>
+              {
+                  details && details.map(detail => {
+                      return (
+
+                         <div>
+                              <div className="left-section">
+                                <div className="weather-description">
+                                  <div className="description">
+                                      { detail.dt_txt }
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="right-section">
+                                <div className="temperature-details">
+                                  <div className="temperature">temperature: {detail.main.temp}</div>
+                                </div>
+                              </div>
+                          </div>
+                      );
+                  })
+              }
+
+          </div >
         </div>
     );
 };

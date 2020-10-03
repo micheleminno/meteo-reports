@@ -73,7 +73,7 @@ const SearchLocation = (props) => {
         </div>
         <Spinner />
         {searchedLocation &&
-            <Results searchedLocation={searchedLocation}/>}
+            <Results />}
       </LocationContext.Provider>
     );
 }
