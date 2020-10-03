@@ -75,8 +75,8 @@ const Location = (props) => {
                 </div>
                 <div className="weather-info">
                     <div className="weather-description"> {props.data.weather} </div>
-                    <div className="weather-temperature"> temperature: {props.data.temp}
-                        (min: {props.data.temp_min} - max: {props.data.temp_max}) </div>
+                    <div className="weather-temperature"> temperature: {props.data.temp} </div>
+                    <div className="weather-range-temperature"> (min: {props.data.temp_min} - max: {props.data.temp_max}) </div>
                     <div className="weather-wind"> wind speed: {props.data.wind_speed} </div>
                 </div>
             </div>

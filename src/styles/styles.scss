@@ -75,6 +75,10 @@ body {
 
     .weather-info {
       flex: 1;
+
+      .weather-range-temperature {
+          margin-left: 1rem;
+      }
     }
   }
 }
