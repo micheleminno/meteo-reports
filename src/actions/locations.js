@@ -8,24 +8,23 @@ export const initiateGetLocations = (searchedLocation) => {
   return async (dispatch) => {
     try {
 
-        let locations;
         if(process.env.NODE_ENV === "production") {
 
             trackPromise(
-                locations = await axios.get(
-                    `${BASE_API_URL}/api/locations/find/${searchedLocation}`
-                );
-            );
+
+                    axios.get(
+                        `${BASE_API_URL}/api/locations/find/${searchedLocation}`
+                    ).then(result => {
+                        const locations = result.data;
+                        return dispatch(setLocations(locations));
+                    })
+                    .catch(err => console.log(err))
+            )
         }
         else {
             console.log("using fake locations");
-            locations = fakelocations;
+            return dispatch(setLocations(fakelocations));
         }
-
-        console.log(locations);
-
-        return dispatch(setLocations(locations.data));
-
     } catch (error) {
         // TODO
     }

@@ -1,5 +1,4 @@
-{
-  "data": [
+[
 
     {
         "coordinates": [34.257, -85.1647],
@@ -40,5 +39,4 @@
         "wind_degree": 330,
         "wind_speed": "3.1 Km/h"
     }
-  ]
-}
+]

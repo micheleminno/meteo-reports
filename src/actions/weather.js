@@ -8,20 +8,23 @@ export const initiateGetWeatherDetails = (locationId) => {
   return async (dispatch) => {
     try {
 
-        let weatherDetails;
         if(process.env.NODE_ENV === "production") {
+
             trackPromise(
-                weatherDetails = await axios.get(
-                    `${BASE_API_URL}/api/locations/forecast/${locationId}`
-                );
-            );
+
+                    axios.get(
+                        `${BASE_API_URL}/api/locations/forecast/${locationId}`
+                    ).then(result => {
+                        const weatherDetails = result.data;
+                        return dispatch(setWeather(weatherDetails));
+                    })
+                    .catch(err => console.log(err))
+            )
         }
         else {
-            weatherDetails = fakeWeatherDetails;
+            console.log("using fake weather details");
+            return dispatch(setWeather(fakeWeatherDetails));
         }
-
-        return dispatch(setWeather(weatherDetails.data));
-
     } catch (error) {
         // TODO
     }
