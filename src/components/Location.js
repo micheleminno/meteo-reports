@@ -55,15 +55,16 @@ const Location = (props) => {
         setLocationId(locationId);
     };
 
-    const handleResetPage = () => {
-        //TODO
+    const handleResetDetails = (e) => {
+        e.preventDefault();
+        setLocationId(null);
     };
 
     const value = {
         city: results.city,
         details: results.list,
         onItemClick: handleItemClick,
-        onResetPage: handleResetPage
+        onResetDetails: handleResetDetails
     };
 
     return (
