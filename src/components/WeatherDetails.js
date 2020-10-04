@@ -24,8 +24,9 @@ const WeatherDetails = ({location}) => {
                          <div key={detail.dt}>
                             <div className="weather-item">
                               <div className="date">{detail.dt_txt}</div>
-                              <div className="temperature">temperature: {detail.main.temp}</div>
-                            </div>
+                              <div className="temperature">{detail.main.temp}</div>
+                              <div className="description">{detail.weather[0].description}</div>
+                          </div>
                          </div>
                       );
                   })
