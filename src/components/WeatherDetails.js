@@ -36,11 +36,7 @@ const WeatherDetails = ({location}) => {
 
                          weatherItem = (<div key={index} className="new-day"> {weatherItem} </div>);
                      }
-                     else {
-
-                         weatherItem = (<div key={index} className="weather-item"> {weatherItem} </div>);
-                     }
-
+                     
                      return weatherItem;
                   })
               }
