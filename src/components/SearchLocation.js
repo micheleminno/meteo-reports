@@ -51,7 +51,7 @@ const SearchLocation = (props) => {
         <div className="search-section">
           <Form className="search-form" onSubmit={handleSearch}>
             <Row>
-              <Col>
+              <Col sm={8}>
                 <Form.Group controlId="description">
                   <Form.Control
                     type="text"
@@ -62,7 +62,7 @@ const SearchLocation = (props) => {
                   />
                 </Form.Group>
               </Col>
-              <Col>
+              <Col sm={4}>
                  <Button variant="primary" type="submit" className="btn-search">
                     Search
                  </Button>

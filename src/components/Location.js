@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
 
 import LocationContext from '../context/LocationContext';
 import {BASE_API_URL} from '../utils/constants';
@@ -70,15 +71,17 @@ const Location = (props) => {
     return (
         <LocationContext.Provider value={value}>
             <div className="location-item" onClick={() => handleItemClick(id)}>
-                <div className="location-name">
+                <Row>
+                    <Col sm={8} className="location-name">
                     {locationAddress}
-                </div>
-                <div className="weather-info">
-                    <div className="weather-description"> {props.data.weather} </div>
-                    <div className="weather-temperature"> temperature: {props.data.temp} </div>
-                    <div className="weather-range-temperature"> (min: {props.data.temp_min} - max: {props.data.temp_max}) </div>
-                    <div className="weather-wind"> wind speed: {props.data.wind_speed} </div>
-                </div>
+                    </Col>
+                    <Col sm={4} className="weather-info">
+                        <div className="weather-description"> {props.data.weather} </div>
+                        <div className="weather-temperature"> temperature: {props.data.temp} </div>
+                        <div className="weather-range-temperature"> (min: {props.data.temp_min} - max: {props.data.temp_max}) </div>
+                        <div className="weather-wind"> wind speed: {props.data.wind_speed} </div>
+                    </Col>
+                </Row>
             </div>
             { locationId && <WeatherDetails location={locationAddress}/> }
 
