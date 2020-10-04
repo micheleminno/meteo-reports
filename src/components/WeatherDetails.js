@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 import LocationContext from '../context/LocationContext';
 
@@ -18,20 +19,32 @@ const WeatherDetails = ({location}) => {
               <h4>{location}</h4>
           </div>
           <div className="main-section">
+              <Row>
               {
-                  details && details.map(detail => {
-                      return (
-                         <div key={detail.dt}>
-                            <div className="weather-item">
-                              <div className="date">{detail.dt_txt}</div>
-                              <div className="temperature">{detail.main.temp}</div>
-                              <div className="description">{detail.weather[0].description}</div>
-                              <div className="wind">wind: {detail.wind.speed} km/h</div>
-                          </div>
-                         </div>
-                      );
+                  details && details.map((detail, index) => {
+
+                     let weatherItem = (
+                             <div key={index} className="weather-item">
+                                 <div className="date">{detail.dt_txt}</div>
+                                 <div className="temperature">{detail.main.temp}</div>
+                                 <div className="description">{detail.weather[0].description}</div>
+                                 <div className="wind">wind: {detail.wind.speed} km/h</div>
+                             </div>
+                     );
+
+                     if(index % 5 == 0) {
+
+                         weatherItem = (<div key={index} className="new-day"> {weatherItem} </div>);
+                     }
+                     else {
+
+                         weatherItem = (<div key={index} className="weather-item"> {weatherItem} </div>);
+                     }
+
+                     return weatherItem;
                   })
               }
+              </Row>
           </div >
         </div>
     );

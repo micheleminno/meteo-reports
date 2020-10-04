@@ -91,6 +91,10 @@ body {
   width: 80%;
   margin: 0 auto;
 
+  .new-day {
+      border: 2px solid #000;
+  }
+
   .weather-item {
     display: flex;
     padding: 1rem;
