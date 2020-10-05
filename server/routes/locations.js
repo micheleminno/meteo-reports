@@ -58,6 +58,7 @@ router.get("/forecast/:locationId", function(req, res, next) {
                     detail.main.temp_max = toCelsius(detail.main.temp_max);
                     detail.main.feels_like = toCelsius(detail.main.feels_like);
 
+                    detail.wind.speed = toKmH(detail.wind.speed);
                     const currentHour = detail.dt_txt.slice(-8, -6);
                     detail.light = currentHour >= sunriseHour && currentHour <= sunsetHour;
 
