@@ -21,6 +21,12 @@ const toCelsius = kelvinDegrees => {
     return celsiusDegrees;
 };
 
+const toKmH = ms => {
+
+    const KM_H = " km/h";
+    return 3.6 * ms + KM_H;
+};
+
 router.get("/forecast/:locationId", function(req, res, next) {
 
     const locationId = req.params.locationId;
@@ -83,7 +89,7 @@ router.get("/find/:location", function(req, res, next) {
                     temp_min: toCelsius(city.main.temp_min),
                     temp_max: toCelsius(city.main.temp_max),
                     humidity: city.main.humidity,
-                    wind_speed: city.wind.speed + KM_H,
+                    wind_speed: toKmH(city.wind.speed),
                     wind_degree: city.wind.deg,
                     weather: city.weather[0].description
                 };
