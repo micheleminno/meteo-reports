@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-
+const {groupBy} = require('lodash');
 const router = express.Router();
 
 const API_HOST = "community-open-weather-map.p.rapidapi.com";
@@ -31,6 +31,10 @@ router.get("/forecast/:locationId", function(req, res, next) {
 
     const locationId = req.params.locationId;
 
+    const toHour = millies => {
+        return Math.floor((millies/60/60) % 24);
+    };
+
     axios.get(OPEN_WEATHER_MAP_API + "/forecast", {
             headers: headers,
             params: {
@@ -39,19 +43,34 @@ router.get("/forecast/:locationId", function(req, res, next) {
         })
         .then(function(response) {
 
-            console.log(response);
-            response.data.list.map(weatherItem => {
+            const sunriseHour = toHour(response.data.city.sunrise);
+            const sunsetHour = toHour(response.data.city.sunset);
 
-                weatherItem.main.temp = toCelsius(weatherItem.main.temp);
-                weatherItem.main.temp_min = toCelsius(weatherItem.main.temp_min);
-                weatherItem.main.temp_max = toCelsius(weatherItem.main.temp_max);
-                weatherItem.main.feels_like = toCelsius(weatherItem.main.feels_like);
-                weatherItem.dt_txt = weatherItem.dt_txt.slice(0, -3); ;
+            const groupedDetails = groupBy(response.data.list, detail => detail.dt_txt.slice(0, -9));
 
-                return weatherItem;
+            const labeledGroupedDetails = Object.keys(groupedDetails)
+                                            .map((day, dayIndex) => {
+
+                return groupedDetails[day].map((detail) => {
+
+                    detail.main.temp = toCelsius(detail.main.temp);
+                    detail.main.temp_min = toCelsius(detail.main.temp_min);
+                    detail.main.temp_max = toCelsius(detail.main.temp_max);
+                    detail.main.feels_like = toCelsius(detail.main.feels_like);
+
+                    const currentHour = detail.dt_txt.slice(-8, -6);
+                    detail.light = currentHour >= sunriseHour && currentHour <= sunsetHour;
+
+                    detail.dt_txt = detail.dt_txt.slice(0, -3);
+                    detail.day = "day-" + dayIndex;
+
+                    return detail;
+                });
             });
 
-            const resData = {city: response.data.city, list: response.data.list};
+            const flattenedDetails = labeledGroupedDetails.flat();
+
+            const resData = {city: response.data.city, list: flattenedDetails};
             res.json(resData);
         })
         .catch(function(error) {

@@ -12,7 +12,7 @@ const WeatherDetails = ({location}) => {
         <div className="weather-details">
           <div className="back-link">
             <a href="/#" onClick={onResetDetails}>
-              &lt;&lt; Compress this
+              &lt;&lt; Hide
             </a>
           </div>
           <div>
@@ -23,22 +23,21 @@ const WeatherDetails = ({location}) => {
               {
                   details && details.map((detail, index) => {
 
-                     let weatherItem = (
-                             <div key={index} className="weather-item">
+                      let classes = "weather-item";
+
+                      if(!detail.light) {
+                          classes += " dark";
+                      }
+
+                      return (
+                             <div key={index} className={classes}>
                                  <div className="date">{detail.dt_txt}</div>
                                  <div className="temperature">{detail.main.temp}</div>
                                  <div className="description">{detail.weather[0].description}</div>
                                  <div className="wind">wind: {detail.wind.speed} km/h</div>
                              </div>
                      );
-
-                     if(index % 5 == 0) {
-
-                         weatherItem = (<div key={index} className="new-day"> {weatherItem} </div>);
-                     }
-                     
-                     return weatherItem;
-                  })
+                 })
               }
               </Row>
           </div >
