@@ -24,7 +24,7 @@ const toCelsius = kelvinDegrees => {
 const toKmH = ms => {
 
     const KM_H = " km/h";
-    return 3.6 * ms + KM_H;
+    return Math.floor(3.6 * ms) + KM_H;
 };
 
 router.get("/forecast/:locationId", function(req, res, next) {
@@ -86,7 +86,7 @@ router.get("/find/:location", function(req, res, next) {
 
     const location = req.params.location;
 
-    const KM_H = " Km/h"
+    const KM_H = " Km/h";
 
     axios.get(OPEN_WEATHER_MAP_API + "/find", {
             headers: headers,
