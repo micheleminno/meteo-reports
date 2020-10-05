@@ -34,7 +34,7 @@ const WeatherDetails = ({location}) => {
                                  <div className="date">{detail.dt_txt}</div>
                                  <div className="temperature">{detail.main.temp}</div>
                                  <div className="description">{detail.weather[0].description}</div>
-                                 <div className="wind">wind: {detail.wind.speed} km/h</div>
+                                 <div className="wind">wind: {detail.wind.speed}</div>
                              </div>
                      );
                  })
